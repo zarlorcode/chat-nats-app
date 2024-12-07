@@ -10,8 +10,8 @@ Esta es una aplicación de chat colaborativo en línea basada en Go y NATS. Util
 ## Configuración
 1. Clona el repositorio:
    ```bash
-   git clone <URL_REPO>
-   cd chat-nats
+   git clone https://github.com/zarlorcode/chat-nats-app.git
+   cd chat-nats-go
    
 2. Instalar dependencias de Go
     ```bash
@@ -25,7 +25,7 @@ Esta es una aplicación de chat colaborativo en línea basada en Go y NATS. Util
     ```bash
     go run main.go <NATS_SERVER> <CHAT_CHANNEL> <USER_NAME>
     
-    Parámetros:
+Parámetros:
     <NATS_SERVER>: La dirección del servidor NATS (por ejemplo, nats://localhost:4222).
     <CHAT_CHANNEL>: El nombre del canal de chat (por ejemplo, chatroom).
     <USER_NAME>: El nombre o identificador que se usará en el chat.

@@ -35,16 +35,29 @@ func main() {
 		os.Exit(1)
 	}
 
-	// Crear un Stream para almacenar mensajes
+	// Verificar o crear el Stream
 	streamName := "CHAT"
-	_, err = js.AddStream(&nats.StreamConfig{
-		Name:     streamName,
-		Subjects: []string{chatChannel},
-		Storage:  nats.FileStorage,
-		MaxAge:   time.Hour, // Retener mensajes solo de la última hora
-	})
-	if err != nil {
-		fmt.Println("Error creando el Stream:", err)
+	streamInfo, err := js.StreamInfo(streamName)
+	if err != nil && err != nats.ErrStreamNotFound {
+		fmt.Println("Error verificando el Stream:", err)
+		return
+	}
+
+	// Si el Stream no existe, crearlo
+	if streamInfo == nil {
+		_, err = js.AddStream(&nats.StreamConfig{
+			Name:     streamName,
+			Subjects: []string{chatChannel},
+			Storage:  nats.FileStorage,
+			MaxAge:   time.Hour, // Retener mensajes solo de la última hora
+		})
+		if err != nil {
+			fmt.Println("Error creando el Stream:", err)
+			return
+		}
+		fmt.Println("Stream creado exitosamente.")
+	} else {
+		fmt.Println("El Stream ya existe. Usándolo.")
 	}
 
 	fmt.Printf("Conectado al servidor NATS en %s\n", natsServer)
@@ -122,6 +135,7 @@ func main() {
 	// Mantener la conexión activa
 	select {}
 }
+
 
 
 
