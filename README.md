@@ -24,7 +24,7 @@ Esta es una aplicación de chat colaborativo en línea basada en Go y NATS. Util
 4. Ejecutar la aplicación
     ```bash
     go run main.go <NATS_SERVER> <CHAT_CHANNEL> <USER_NAME>
-    
+    ´´´
 Parámetros:
     <NATS_SERVER>: La dirección del servidor NATS (por ejemplo, nats://localhost:4222).
     <CHAT_CHANNEL>: El nombre del canal de chat (por ejemplo, chatroom).
